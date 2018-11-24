@@ -42,6 +42,7 @@ fun test(context: Context) {
         init {
 
         }
+
         textView {
             id = 0
             text = "Testing"
@@ -56,6 +57,11 @@ fun test(context: Context) {
         }
 
         view {
+            layoutParams {
+                layoutParams {
+
+                }
+            }
             layoutParams {
 
             }

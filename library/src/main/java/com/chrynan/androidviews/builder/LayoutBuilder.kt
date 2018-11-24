@@ -10,8 +10,10 @@ open class LayoutBuilder<V : ViewGroup, P : ViewGroup.LayoutParams>(
         val newBaseLayoutParams: () -> P
 ) {
 
+    @LayoutFunctionScope
     fun init(block: V.() -> Unit) = viewGroup.apply(block)
 
+    @LayoutFunctionScope
     fun <V : View> V.layoutParams(block: LayoutParamsInitializer<P>) {
         val builder = layoutParamsBuilderFor(this, newBaseLayoutParams())
         builder(block)
@@ -30,3 +32,8 @@ fun <V : ViewGroup, P : ViewGroup.LayoutParams, NV : ViewGroup, NP : ViewGroup.L
     this.viewGroup.addView(layoutBuilder.viewGroup)
     return layoutBuilder.viewGroup
 }
+
+@DslMarker
+@Retention(AnnotationRetention.RUNTIME)
+@Target(AnnotationTarget.FUNCTION)
+annotation class LayoutFunctionScope
