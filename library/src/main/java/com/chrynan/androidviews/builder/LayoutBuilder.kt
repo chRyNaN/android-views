@@ -14,6 +14,12 @@ open class LayoutBuilder<V : ViewGroup, P : ViewGroup.LayoutParams>(
     fun init(block: V.() -> Unit) = viewGroup.apply(block)
 
     @LayoutFunctionScope
+    fun <V : ViewGroup, P : ViewGroup.LayoutParams> layoutParams(parent: LayoutBuilder<V, P>, block: LayoutParamsInitializer<P>) {
+        val builder = layoutParamsBuilderFor(viewGroup, parent.newBaseLayoutParams())
+        builder(block)
+    }
+
+    @LayoutFunctionScope
     fun <V : View> V.layoutParams(block: LayoutParamsInitializer<P>) {
         val builder = layoutParamsBuilderFor(this, newBaseLayoutParams())
         builder(block)
