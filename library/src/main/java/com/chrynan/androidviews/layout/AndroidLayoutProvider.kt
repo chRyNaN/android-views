@@ -15,4 +15,13 @@ object AndroidLayoutProvider {
         parentView.removeAllViews()
         parentView.addView(layout.onCreateLayout<V, P>(parentView.context).viewGroup)
     }
+
+    fun <T, V : ViewGroup, P : ViewGroup.LayoutParams> render(activity: Activity, layout: AndroidRenderLayout<T>, item: T) {
+        activity.setContentView(layout.onRenderLayout<V, P>(activity, item).viewGroup)
+    }
+
+    fun <T, V : ViewGroup, P : ViewGroup.LayoutParams> render(parentView: ViewGroup, layout: AndroidRenderLayout<T>, item: T) {
+        parentView.removeAllViews()
+        parentView.addView(layout.onRenderLayout<V, P>(parentView.context, item).viewGroup)
+    }
 }
