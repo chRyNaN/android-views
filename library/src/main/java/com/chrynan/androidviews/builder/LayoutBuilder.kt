@@ -4,11 +4,13 @@ package com.chrynan.androidviews.builder
 
 import android.view.View
 import android.view.ViewGroup
+import com.chrynan.inlinepixel.ContextScreenDimensionUnitConverter
+import com.chrynan.inlinepixel.ScreenDimensionUnitConverter
 
 open class LayoutBuilder<V : ViewGroup, P : ViewGroup.LayoutParams>(
         val viewGroup: V,
         val newBaseLayoutParams: () -> P
-) {
+) : ScreenDimensionUnitConverter by ContextScreenDimensionUnitConverter(context = viewGroup.context) {
 
     @LayoutFunctionScope
     fun init(block: V.() -> Unit) = viewGroup.apply(block)
