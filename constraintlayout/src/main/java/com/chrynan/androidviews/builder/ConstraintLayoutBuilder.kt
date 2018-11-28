@@ -30,6 +30,12 @@ fun View.constraints(constraintLayout: ConstraintLayout, block: ConstraintBuilde
     builder.build()
 }
 
+fun <V : ConstraintLayout, P : ConstraintLayout.LayoutParams> View.constraints(layoutBuilder: LayoutBuilder<V, P>, block: ConstraintBuilder.() -> Unit) {
+    val builder = ConstraintBuilder(this, layoutBuilder.viewGroup)
+    block(builder)
+    builder.build()
+}
+
 enum class ConstraintSide(val constraintSetValue: Int) {
 
     LEFT(ConstraintSet.LEFT),
