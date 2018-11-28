@@ -29,6 +29,8 @@ fun View.constraints(constraintLayout: ConstraintLayout, block: ConstraintBuilde
     val builder = ConstraintBuilder(this, constraintLayout)
     block(builder)
     builder.build()
+    requestLayout()
+    invalidate()
 }
 
 @ConstraintFunctionScope
@@ -36,6 +38,8 @@ fun <V : ConstraintLayout, P : ConstraintLayout.LayoutParams> View.constraints(l
     val builder = ConstraintBuilder(this, layoutBuilder.viewGroup)
     block(builder)
     builder.build()
+    requestLayout()
+    invalidate()
 }
 
 @DslMarker
