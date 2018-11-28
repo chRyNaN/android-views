@@ -24,17 +24,24 @@ fun <V : ViewGroup, P : ViewGroup.LayoutParams> LayoutBuilder<V, P>.constraintLa
                 block = block
         )
 
+@ConstraintFunctionScope
 fun View.constraints(constraintLayout: ConstraintLayout, block: ConstraintBuilder.() -> Unit) {
     val builder = ConstraintBuilder(this, constraintLayout)
     block(builder)
     builder.build()
 }
 
+@ConstraintFunctionScope
 fun <V : ConstraintLayout, P : ConstraintLayout.LayoutParams> View.constraints(layoutBuilder: LayoutBuilder<V, P>, block: ConstraintBuilder.() -> Unit) {
     val builder = ConstraintBuilder(this, layoutBuilder.viewGroup)
     block(builder)
     builder.build()
 }
+
+@DslMarker
+@Retention(AnnotationRetention.RUNTIME)
+@Target(AnnotationTarget.FUNCTION)
+annotation class ConstraintFunctionScope
 
 enum class ConstraintSide(val constraintSetValue: Int) {
 
