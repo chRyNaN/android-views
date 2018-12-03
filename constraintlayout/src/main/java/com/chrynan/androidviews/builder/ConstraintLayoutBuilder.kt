@@ -25,19 +25,23 @@ fun <V : ViewGroup, P : ViewGroup.LayoutParams> LayoutBuilder<V, P>.constraintLa
         )
 
 fun View.constraints(constraintLayout: ConstraintLayout, block: ConstraintBuilder.() -> Unit) {
-    val builder = ConstraintBuilder(this, constraintLayout)
-    block(builder)
-    builder.build()
-    requestLayout()
-    invalidate()
+    constraintLayout.post {
+        val builder = ConstraintBuilder(this, constraintLayout)
+        block(builder)
+        builder.build()
+        requestLayout()
+        invalidate()
+    }
 }
 
 fun <V : ConstraintLayout, P : ConstraintLayout.LayoutParams> View.constraints(layoutBuilder: LayoutBuilder<V, P>, block: ConstraintBuilder.() -> Unit) {
-    val builder = ConstraintBuilder(this, layoutBuilder.viewGroup)
-    block(builder)
-    builder.build()
-    requestLayout()
-    invalidate()
+    layoutBuilder.viewGroup.post {
+        val builder = ConstraintBuilder(this, layoutBuilder.viewGroup)
+        block(builder)
+        builder.build()
+        requestLayout()
+        invalidate()
+    }
 }
 
 enum class ConstraintSide(val constraintSetValue: Int) {
