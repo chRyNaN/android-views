@@ -1,2 +1,2 @@
 rootProject.name = 'androidviews'
-include ':library', ':constraintlayout', ':recyclerview'
+include ':library', ':constraintlayout', ':recyclerview', ':design'
