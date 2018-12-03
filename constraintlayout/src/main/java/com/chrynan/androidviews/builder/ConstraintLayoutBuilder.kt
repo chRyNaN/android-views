@@ -44,6 +44,28 @@ fun <V : ConstraintLayout, P : ConstraintLayout.LayoutParams> View.constraints(l
     }
 }
 
+sealed class ConstraintSize {
+
+    val constraintSetValue: Int
+        get() = when (this) {
+            is ConstraintSize.ExactPixel -> pixelValue
+            ConstraintSize.WrapContent -> ConstraintSet.WRAP_CONTENT
+            ConstraintSize.MatchConstraint -> ConstraintSet.MATCH_CONSTRAINT
+            ConstraintSize.MatchConstraintWrap -> ConstraintSet.MATCH_CONSTRAINT_WRAP
+            ConstraintSize.MatchConstraintSpread -> ConstraintSet.MATCH_CONSTRAINT_SPREAD
+        }
+
+    object WrapContent : ConstraintSize()
+
+    object MatchConstraint : ConstraintSize()
+
+    object MatchConstraintWrap : ConstraintSize()
+
+    object MatchConstraintSpread : ConstraintSize()
+
+    data class ExactPixel(val pixelValue: Int) : ConstraintSize()
+}
+
 enum class ConstraintSide(val constraintSetValue: Int) {
 
     LEFT(ConstraintSet.LEFT),
@@ -80,52 +102,52 @@ class ConstraintBuilder(
         private val parent: ConstraintLayout
 ) {
 
-    var height: Int = ConstraintSet.WRAP_CONTENT
+    var height: ConstraintSize = ConstraintSize.WrapContent
         set(value) {
             field = value
-            constraintSet.constrainHeight(view.id, value)
+            constraintSet.constrainHeight(view.id, value.constraintSetValue)
         }
 
-    var width: Int = ConstraintSet.WRAP_CONTENT
+    var width: ConstraintSize = ConstraintSize.WrapContent
         set(value) {
             field = value
-            constraintSet.constrainWidth(view.id, value)
+            constraintSet.constrainWidth(view.id, value.constraintSetValue)
         }
 
-    var defaultHeight: Int = ConstraintSet.WRAP_CONTENT
+    var defaultHeight: ConstraintSize = ConstraintSize.WrapContent
         set(value) {
             field = value
-            constraintSet.constrainDefaultHeight(view.id, value)
+            constraintSet.constrainDefaultHeight(view.id, value.constraintSetValue)
         }
 
-    var defaultWidth: Int = ConstraintSet.WRAP_CONTENT
+    var defaultWidth: ConstraintSize = ConstraintSize.WrapContent
         set(value) {
             field = value
-            constraintSet.constrainDefaultWidth(view.id, value)
+            constraintSet.constrainDefaultWidth(view.id, value.constraintSetValue)
         }
 
-    var minHeight: Int = ConstraintSet.WRAP_CONTENT
+    var minHeight: ConstraintSize = ConstraintSize.WrapContent
         set(value) {
             field = value
-            constraintSet.constrainMinHeight(view.id, value)
+            constraintSet.constrainMinHeight(view.id, value.constraintSetValue)
         }
 
-    var minWidth: Int = ConstraintSet.WRAP_CONTENT
+    var minWidth: ConstraintSize = ConstraintSize.WrapContent
         set(value) {
             field = value
-            constraintSet.constrainMinWidth(view.id, value)
+            constraintSet.constrainMinWidth(view.id, value.constraintSetValue)
         }
 
-    var maxHeight: Int = ConstraintSet.WRAP_CONTENT
+    var maxHeight: ConstraintSize = ConstraintSize.WrapContent
         set(value) {
             field = value
-            constraintSet.constrainMaxHeight(view.id, value)
+            constraintSet.constrainMaxHeight(view.id, value.constraintSetValue)
         }
 
-    var maxWidth: Int = ConstraintSet.WRAP_CONTENT
+    var maxWidth: ConstraintSize = ConstraintSize.WrapContent
         set(value) {
             field = value
-            constraintSet.constrainMaxWidth(view.id, value)
+            constraintSet.constrainMaxWidth(view.id, value.constraintSetValue)
         }
 
     var percentHeight: Float = 0f
