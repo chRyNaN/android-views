@@ -266,6 +266,78 @@ class ConstraintBuilder(
             constraintSet.setHorizontalBias(view.id, value)
         }
 
+    var marginLeft: Int = 0
+        set(value) {
+            field = value
+            constraintSet.setMargin(view.id, ConstraintSet.LEFT, value)
+        }
+
+    var marginRight: Int = 0
+        set(value) {
+            field = value
+            constraintSet.setMargin(view.id, ConstraintSet.RIGHT, value)
+        }
+
+    var marginStart: Int = 0
+        set(value) {
+            field = value
+            constraintSet.setMargin(view.id, ConstraintSet.START, value)
+        }
+
+    var marginEnd: Int = 0
+        set(value) {
+            field = value
+            constraintSet.setMargin(view.id, ConstraintSet.END, value)
+        }
+
+    var marginTop: Int = 0
+        set(value) {
+            field = value
+            constraintSet.setMargin(view.id, ConstraintSet.TOP, value)
+        }
+
+    var marginBottom: Int = 0
+        set(value) {
+            field = value
+            constraintSet.setMargin(view.id, ConstraintSet.BOTTOM, value)
+        }
+
+    var goneMarginLeft: Int = 0
+        set(value) {
+            field = value
+            constraintSet.setGoneMargin(view.id, ConstraintSet.LEFT, value)
+        }
+
+    var goneMarginRight: Int = 0
+        set(value) {
+            field = value
+            constraintSet.setGoneMargin(view.id, ConstraintSet.RIGHT, value)
+        }
+
+    var goneMarginStart: Int = 0
+        set(value) {
+            field = value
+            constraintSet.setGoneMargin(view.id, ConstraintSet.START, value)
+        }
+
+    var goneMarginEnd: Int = 0
+        set(value) {
+            field = value
+            constraintSet.setGoneMargin(view.id, ConstraintSet.END, value)
+        }
+
+    var goneMarginTop: Int = 0
+        set(value) {
+            field = value
+            constraintSet.setGoneMargin(view.id, ConstraintSet.TOP, value)
+        }
+
+    var goneMarginBottom: Int = 0
+        set(value) {
+            field = value
+            constraintSet.setGoneMargin(view.id, ConstraintSet.BOTTOM, value)
+        }
+
     private val constraintSet = ConstraintSet()
 
     init {
