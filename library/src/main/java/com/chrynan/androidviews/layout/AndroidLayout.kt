@@ -7,5 +7,9 @@ import com.chrynan.androidviews.builder.LayoutBuilder
 
 interface AndroidLayout {
 
+    fun onBeforeCreateLayout() {}
+
     fun onCreateLayout(context: Context): LayoutBuilder<*, *>
+
+    fun onLayoutCreated() {}
 }
