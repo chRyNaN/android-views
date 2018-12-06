@@ -22,14 +22,18 @@ object AndroidLayoutProvider {
 
     fun <T> render(activity: Activity, layout: AndroidRenderLayout<T>, item: T) {
         layout.onBeforeCreateLayout()
+        layout.onBeforeRender()
         activity.setContentView(layout.onRenderLayout(activity, item).viewGroup)
         layout.onLayoutCreated()
+        layout.onLayoutRendered()
     }
 
     fun <T> render(parentView: ViewGroup, layout: AndroidRenderLayout<T>, item: T) {
         parentView.removeAllViews()
         layout.onBeforeCreateLayout()
+        layout.onBeforeRender()
         parentView.addView(layout.onRenderLayout(parentView.context, item).viewGroup)
         layout.onLayoutCreated()
+        layout.onLayoutRendered()
     }
 }
