@@ -5,13 +5,10 @@ package com.chrynan.androidviews.builder
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
-import com.chrynan.inlinepixel.ContextScreenDimensionUnitConverter
-import com.chrynan.inlinepixel.ScreenDimensionUnitConverter
 
 typealias ViewInitializer<V> = V.() -> Unit
 
-open class ViewBuilder<V : View>(val view: V) : (ViewInitializer<V>) -> V,
-        ScreenDimensionUnitConverter by ContextScreenDimensionUnitConverter(context = view.context) {
+open class ViewBuilder<V : View>(val view: V) : (ViewInitializer<V>) -> V {
 
     override fun invoke(viewInitializer: ViewInitializer<V>): V {
         viewInitializer(view)
