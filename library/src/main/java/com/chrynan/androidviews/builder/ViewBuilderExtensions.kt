@@ -93,6 +93,12 @@ fun <V : ViewGroup, P : ViewGroup.LayoutParams> LayoutBuilder<V, P>.space(block:
 
 // ProgressBar
 
+fun horizontalProgressBar(context: Context, block: (ProgressBar.() -> Unit)? = null) =
+        viewBuilderFor(ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal))
+
+fun <V : ViewGroup, P : ViewGroup.LayoutParams> LayoutBuilder<V, P>.horizonalProgressBar(block: (ProgressBar.() -> Unit)? = null) =
+        addViewBuilderFor(ProgressBar(viewGroup.context), block)
+
 fun progressBar(context: Context, block: (ProgressBar.() -> Unit)? = null) =
         viewBuilderFor(ProgressBar(context), block)
 
